@@ -1,7 +1,6 @@
 .RollDice {
   display: flex;
   flex-flow: column nowrap;
-  min-height: 100vh;
 }
 
 /* Shows each dice in one row */
@@ -13,12 +12,11 @@
 /* Stylling rolldice button */
 .RollDice button {
   width: 15em;
-  padding: 1.5em;
+  padding: 1em;
   border: 0px;
   border-radius: 10px;
   color: white;
   background-color: black;
-  margin-top: 3em;
   align-self: center;
 }
 
