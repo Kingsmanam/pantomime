@@ -92,7 +92,9 @@ function App() {
         {items.map((item, i) => {
           return (
             <button
-              style={{ backgroundColor: showDice == i + 1 ? "red" : "black" }}
+              style={{
+                backgroundColor: showDice == i + 1 ? "red" : "black",
+              }}
               className="item"
               onClick={() => handleClick(i)}
               disabled={showDice == i + 1 ? false : true}
