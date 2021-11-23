@@ -91,13 +91,14 @@ function App() {
       <div className="items">
         {items.map((item, i) => {
           return (
-            <div
+            <button
               style={{ backgroundColor: showDice == i + 1 ? "red" : "black" }}
               className="item"
               onClick={() => handleClick(i)}
+              disabled={showDice == i + 1 ? false : true}
             >
               {item}
-            </div>
+            </button>
           );
         })}
       </div>
