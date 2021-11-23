@@ -1,23 +1,27 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-top: 10px;
+  height: 100%
 }
 
 .items {
-  margin-top: 30px;
-}
-
-.itemsContainer {
   display: flex;
-  justify-content: center;
+  margin-top: 10px;
+  height: 40%;
+  width: 40%;
   align-items: center;
+  background-color: #695acd;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border-radius: 10px;
 }
 
 .item {
   display: flex;
+  align-items: center;
   justify-content: center;
   background-color: #695acd;
   padding: 1rem 2rem;
@@ -25,10 +29,14 @@
   color: #fff;
   border-radius: 10px;
   cursor: pointer;
+  height: 30px;
+  width: 150px;
 }
 
 .Rollcontainer {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .dice {
@@ -42,7 +50,20 @@
   color: #fff;
   font-size: 60px;
 }
-
-.btn {
+.Rollcontainer > button {
   margin-top: 20px;
+  height: 30px;
+  border-radius: 5px;
+  border-style: hidden;
+  background-color: black;
+  color: white;
+}
+.timer {
+  font-size: large;
+}
+.wordcontainer {
+  display: flex;
+  align-items: center;
+  font-size: large;
+  margin-top: 10px;
 }

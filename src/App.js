@@ -13,6 +13,7 @@ function App() {
   const handleRoll = () => {
     const random = Math.floor(Math.random() * numbers.length + 1);
     setShowDice(random);
+    console.log(random);
   };
 
   const items = [
@@ -34,7 +35,7 @@ function App() {
   ];
 
   const handleClick = (i) => {
-    const random = Math.floor(Math.random() * 4);
+    const random = Math.floor(Math.random() * pantomime[i].length);
     setText(pantomime[i][random]);
     startTimer();
   };
@@ -65,13 +66,25 @@ function App() {
   return (
     <div className="container">
       <div className="Rollcontainer">
-        <div className="dice">{showDice}</div>
-        <button onClick={() => handleRoll()} className="btn">
-          Roll Dice
-        </button>
+        <div className="dice">
+          {showDice == 1 ? (
+            <i class="fas fa-dice-one"></i>
+          ) : showDice == 2 ? (
+            <i class="fas fa-dice-two"></i>
+          ) : showDice == 3 ? (
+            <i class="fas fa-dice-three"></i>
+          ) : showDice == 4 ? (
+            <i class="fas fa-dice-four"></i>
+          ) : showDice == 5 ? (
+            <i class="fas fa-dice-five"></i>
+          ) : (
+            <i class="fas fa-dice-six"></i>
+          )}
+        </div>
+        <button onClick={() => handleRoll()}>Roll Dice</button>
       </div>
 
-      <div>
+      <div className="wordcontainer">
         <p>{text}</p>
       </div>
 
