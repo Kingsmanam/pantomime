@@ -48,7 +48,10 @@
   background-color: #695acd;
   border-radius: 20px;
   color: #fff;
-  font-size: 60px;
+  font-size: 70px;
+}
+.dice > p {
+  font-size: 20px;
 }
 .Rollcontainer > button {
   margin-top: 20px;
@@ -57,6 +60,7 @@
   border-style: hidden;
   background-color: black;
   color: white;
+  cursor: pointer;
 }
 .timer {
   font-size: large;
