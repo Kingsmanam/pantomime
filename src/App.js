@@ -13,7 +13,10 @@ function App() {
   const handleRoll = () => {
     const random = Math.floor(Math.random() * numbers.length + 1);
     setShowDice(random);
+    console.log(showDice);
     setMinute(1);
+    setSecond(0);
+    clearTimeout(startTimer);
   };
 
   const items = [
@@ -38,12 +41,15 @@ function App() {
     const random = Math.floor(Math.random() * pantomime[i].length);
     setText(pantomime[i][random]);
     startTimer();
+    setTimeout(() => {
+      setShowDice(0);
+    }, 300);
   };
 
   const startTimer = () => {
     setTimeout(() => {
       if (second > 0) {
-        setSecond((prevsecond) => prevsecond - 1);
+        setSecond(second - 1);
       } else if (second == 0 && minute > 0) {
         setMinute(minute - 1);
         setSecond(59);
@@ -52,7 +58,7 @@ function App() {
         setMinute(59);
         setSecond(59);
       } else {
-        clearInterval(startTimer); 
+        clearTimeout(startTimer);
       }
     }, 1000);
   };
@@ -68,18 +74,20 @@ function App() {
       <div className="Rollcontainer">
         <div className="dice">
           {showDice === 1 ? (
-            <i class="fas fa-dice-one"></i>
+            <i className="fas fa-dice-one"></i>
           ) : showDice === 2 ? (
-            <i class="fas fa-dice-two"></i>
+            <i className="fas fa-dice-two"></i>
           ) : showDice === 3 ? (
-            <i class="fas fa-dice-three"></i>
+            <i className="fas fa-dice-three"></i>
           ) : showDice === 4 ? (
-            <i class="fas fa-dice-four"></i>
+            <i className="fas fa-dice-four"></i>
           ) : showDice === 5 ? (
-            <i class="fas fa-dice-five"></i>
+            <i className="fas fa-dice-five"></i>
           ) : showDice === 6 ? (
-            <i class="fas fa-dice-six"></i>
-          ) : <p>Roll The Dice!</p>}
+            <i className="fas fa-dice-six"></i>
+          ) : (
+            <p>Roll The Dice!</p>
+          )}
         </div>
         <button onClick={() => handleRoll()}>Roll Dice</button>
       </div>
@@ -106,12 +114,15 @@ function App() {
       </div>
 
       <div className="timer">
-        <p style={{color: second == 0 && minute == 0 ? 'red' : 'black'}}>
+        <p style={{ color: second == 0 && minute == 0 ? "red" : "black" }}>
           {hour < 10 ? `0${hour}` : `${hour}`} :{" "}
           {minute < 10 ? `0${minute}` : `${minute}`} :{" "}
           {second < 10 ? `0${second}` : `${second}`}
         </p>
       </div>
+      <p>
+        توجه توجه لطفا تا پایان بازی اکیدا دکمه های بازی را فشار ندهید با تشکر
+      </p>
     </div>
   );
 }
