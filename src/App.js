@@ -3,21 +3,13 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [second, setSecond] = useState(0);
-  const [minute, setMinute] = useState(1);
+  const [second, setSecond] = useState(10);
+  const [minute, setMinute] = useState(0);
   const [hour, setHour] = useState(0);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(null);
   const numbers = [1, 2, 3, 4, 5, 6];
-  const [showDice, setShowDice] = useState();
-
-  const handleRoll = () => {
-    const random = Math.floor(Math.random() * numbers.length + 1);
-    setShowDice(random);
-    console.log(showDice);
-    setMinute(1);
-    setSecond(0);
-    clearTimeout(startTimer);
-  };
+  const [showDice, setShowDice] = useState(null);
+  const [showstop, setShowstop] = useState(false);
 
   const items = [
     "very easy",
@@ -37,19 +29,25 @@ function App() {
     ["g", "h", "i"],
   ];
 
+  const handleRoll = () => {
+    const random = Math.floor(Math.random() * numbers.length + 1);
+    setShowDice(random);
+    setText(null)
+  };
+
   const handleClick = (i) => {
     const random = Math.floor(Math.random() * pantomime[i].length);
     setText(pantomime[i][random]);
-    startTimer();
+
     setTimeout(() => {
       setShowDice(0);
-    }, 300);
+    }, 1500);
   };
 
   const startTimer = () => {
     setTimeout(() => {
       if (second > 0) {
-        setSecond(second - 1);
+        setSecond((prevsecond) => prevsecond - 1);
       } else if (second == 0 && minute > 0) {
         setMinute(minute - 1);
         setSecond(59);
@@ -59,6 +57,8 @@ function App() {
         setSecond(59);
       } else {
         clearTimeout(startTimer);
+        setText(null);
+        setSecond(10);
       }
     }, 1000);
   };
@@ -74,17 +74,17 @@ function App() {
       <div className="Rollcontainer">
         <div className="dice">
           {showDice === 1 ? (
-            <i className="fas fa-dice-one"></i>
+            <i class="fas fa-dice-one"></i>
           ) : showDice === 2 ? (
-            <i className="fas fa-dice-two"></i>
+            <i class="fas fa-dice-two"></i>
           ) : showDice === 3 ? (
-            <i className="fas fa-dice-three"></i>
+            <i class="fas fa-dice-three"></i>
           ) : showDice === 4 ? (
-            <i className="fas fa-dice-four"></i>
+            <i class="fas fa-dice-four"></i>
           ) : showDice === 5 ? (
-            <i className="fas fa-dice-five"></i>
+            <i class="fas fa-dice-five"></i>
           ) : showDice === 6 ? (
-            <i className="fas fa-dice-six"></i>
+            <i class="fas fa-dice-six"></i>
           ) : (
             <p>Roll The Dice!</p>
           )}
@@ -100,9 +100,7 @@ function App() {
         {items.map((item, i) => {
           return (
             <button
-              style={{
-                backgroundColor: showDice == i + 1 ? "red" : "black",
-              }}
+              style={{ backgroundColor: showDice == i + 1 ? "red" : "black" }}
               className="item"
               onClick={() => handleClick(i)}
               disabled={showDice == i + 1 ? false : true}
@@ -119,10 +117,24 @@ function App() {
           {minute < 10 ? `0${minute}` : `${minute}`} :{" "}
           {second < 10 ? `0${second}` : `${second}`}
         </p>
+        <button
+          onClick={() => {
+            startTimer();
+            setShowstop(true);
+            console.log('showstop =>',showstop);
+            console.log('text =>',text);
+          }}
+          disabled={text == null ? true : false}
+        >
+          { !showstop
+            ? "Start"
+            : text == null 
+            ? "Start"
+            : second == 10 
+            ? "Start" 
+            : "Stop"}
+        </button>
       </div>
-      <p>
-        توجه توجه لطفا تا پایان بازی اکیدا دکمه های بازی را فشار ندهید با تشکر
-      </p>
     </div>
   );
 }
