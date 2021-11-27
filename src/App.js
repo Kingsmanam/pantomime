@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [second, setSecond] = useState(10);
+  const [second, setSecond] = useState(0);
   const [minute, setMinute] = useState(0);
   const [hour, setHour] = useState(0);
   const [text, setText] = useState(null);
@@ -33,21 +33,41 @@ function App() {
     const random = Math.floor(Math.random() * numbers.length + 1);
     setShowDice(random);
     setText(null)
+    setSecond(0);
+    setMinute(0)
+    setShowstop(false)
   };
 
   const handleClick = (i) => {
     const random = Math.floor(Math.random() * pantomime[i].length);
     setText(pantomime[i][random]);
-
+    setSecond(0)
     setTimeout(() => {
       setShowDice(0);
-    }, 1500);
+    }, 500);
+    if ((i + 1) == 1) {
+      setSecond(30)
+    } else if (i + 1 == 2) {
+      setMinute(1)
+    } else if (i + 1 == 3) {
+      setMinute(1);
+      setSecond(30);
+    } else if (i + 1 == 4) { 
+      setMinute(2);
+    } else if (i + 1 == 5) {
+      setMinute(2);
+      setSecond(30);
+    } else {
+      setMinute(3)
+    }
   };
+
+ 
 
   const startTimer = () => {
     setTimeout(() => {
       if (second > 0) {
-        setSecond((prevsecond) => prevsecond - 1);
+        setSecond(second - 1);
       } else if (second == 0 && minute > 0) {
         setMinute(minute - 1);
         setSecond(59);
@@ -57,16 +77,19 @@ function App() {
         setSecond(59);
       } else {
         clearTimeout(startTimer);
+        setShowstop(false)
         setText(null);
-        setSecond(10);
-      }
+        setMinute(0)
+        setSecond(0);
+      } 
     }, 1000);
   };
 
   useEffect(() => {
-    if (text) {
+    if (showstop) {
       startTimer();
-    }
+    } 
+    clearTimeout(startTimer)
   }, [second]);
 
   return (
@@ -120,9 +143,7 @@ function App() {
         <button
           onClick={() => {
             startTimer();
-            setShowstop(true);
-            console.log('showstop =>',showstop);
-            console.log('text =>',text);
+            setShowstop(!showstop);
           }}
           disabled={text == null ? true : false}
         >
@@ -130,7 +151,7 @@ function App() {
             ? "Start"
             : text == null 
             ? "Start"
-            : second == 10 
+            : second == 0
             ? "Start" 
             : "Stop"}
         </button>
@@ -138,5 +159,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
