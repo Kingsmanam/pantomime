@@ -78,7 +78,7 @@
 .fas {
   animation: rollDice 300ms linear;
 }
-
+ 
 @keyframes rollDice {
   0% {
     transform: translateY(0);

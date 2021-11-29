@@ -42,9 +42,6 @@ function App() {
     const random = Math.floor(Math.random() * pantomime[i].length);
     setText(pantomime[i][random]);
     setSecond(0)
-    setTimeout(() => {
-      setShowDice(0);
-    }, 500);
     if ((i + 1) == 1) {
       setSecond(30)
     } else if (i + 1 == 2) {
@@ -97,17 +94,17 @@ function App() {
       <div className="Rollcontainer">
         <div className="dice">
           {showDice === 1 ? (
-            <i class="fas fa-dice-one"></i>
+            <i key="1" class="fas fa-dice-one"></i>
           ) : showDice === 2 ? (
-            <i class="fas fa-dice-two"></i>
+            <i key="2" class="fas fa-dice-two"></i>
           ) : showDice === 3 ? (
-            <i class="fas fa-dice-three"></i>
+            <i key="3" class="fas fa-dice-three"></i>
           ) : showDice === 4 ? (
-            <i class="fas fa-dice-four"></i>
+            <i key="4" class="fas fa-dice-four"></i>
           ) : showDice === 5 ? (
-            <i class="fas fa-dice-five"></i>
+            <i key="5" class="fas fa-dice-five"></i>
           ) : showDice === 6 ? (
-            <i class="fas fa-dice-six"></i>
+            <i key="6" class="fas fa-dice-six"></i>
           ) : (
             <p>Roll The Dice!</p>
           )}
